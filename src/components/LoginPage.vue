@@ -20,17 +20,17 @@ export default {
             email: '',
             password: ''
         }
-    }, 
+    },
     methods: {
         async login() {
             console.warn(this.email, this.password);
-            }
+        }
 
     },
     mounted() {
         const user = localStorage.getItem('user');
         if (user) {
-            this.$router.push({name: 'HomePage'});
+            this.$router.push({ name: 'HomePage' });
         }
     }
 }
