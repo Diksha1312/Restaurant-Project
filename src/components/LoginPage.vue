@@ -12,7 +12,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
     name: 'LoginPage',
     data() {
@@ -23,15 +23,21 @@ export default {
     },
     methods: {
         async login() {
-            console.warn(this.email, this.password);
+            let result = await axios.get(
+                `http://localhost:3000/users?email=${this.email}&password=${this.password}`)
+            console.warn(result);
+            if (result.status == 200 && result.data.length > 0) {
+                alert("Login successful");
+                localStorage.setItem('user', JSON.stringify(result.data[0]))
+                this.$router.push({ name: 'HomePage' });
+            }
         }
-
     },
     mounted() {
-        const user = localStorage.getItem('user');
+        let user = localStorage.getItem('user');
         if (user) {
             this.$router.push({ name: 'HomePage' });
         }
     }
-}
+};
 </script>
