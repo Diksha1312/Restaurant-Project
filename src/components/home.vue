@@ -1,28 +1,68 @@
 <template>
     <HeaderPage />
     <h1>Hi {{name}}, Welcome to Your Vue.js App</h1>
-    <img alt="Vue logo" src="../assets/logo.png">
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Cuisine</th>
+            <th>Location</th>
+        </tr>
+        <tr v-for="item in restaurants" :key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.cuisine}}</td>
+            <td>{{item.location}}</td>
+        </tr>
+    </table>
 </template>
 
 <script>
 import HeaderPage from './header.vue';
+import axios from 'axios';
 export default {
     name: 'HomePage',
     data() {
         return {
-            name: ''
+            name: '',
+            restaurants: []
         }
     },
     components: {
         HeaderPage
     },
-    mounted() {
+    async mounted() {
         const user = localStorage.getItem('user');
-        this.name = JSON.parse(user).name;
         this.name = JSON.parse(user).name;
         if (!user) {
             this.$router.push({name: 'SignUp'}); 
         }
+        let result = await axios.get("http://localhost:3000/restaurants");
+        console.warn(result)
+        this.restaurants = result.data;
     }
 }
-</script>    
+</script>
+
+<style>
+h1 {
+    text-align: center;
+    color: #333;
+}
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #f5f5f5;
+}
+</style>
