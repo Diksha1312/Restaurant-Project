@@ -7,12 +7,14 @@
             <th>Name</th>
             <th>Cuisine</th>
             <th>Location</th>
+            <th>Actions</th>
         </tr>
         <tr v-for="item in restaurants" :key="item.id">
             <td>{{item.id}}</td>
             <td>{{item.name}}</td>
             <td>{{item.cuisine}}</td>
             <td>{{item.location}}</td>
+            <td><router-link to="/update">Update</router-link></td>
         </tr>
     </table>
 </template>
