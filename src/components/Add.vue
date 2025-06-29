@@ -2,8 +2,8 @@
     <HeaderPage />
     <h1>Add Restaurant</h1>
     <form class="add-restaurant-form">
-        <input type="text" name="name" placeholder="Restaurant Name" v-model="restaurant.restaurantName" />
-        <input type="text" name="cuisine" placeholder="Cuisine Type" v-model="restaurant.cuisineType" />
+        <input type="text" name="name" placeholder="Restaurant Name" v-model="restaurant.name" />
+        <input type="text" name="cuisine" placeholder="Cuisine Type" v-model="restaurant.cuisine" />
         <input type="text" name="location" placeholder="Location" v-model="restaurant.location" />
         <button type="button" v-on:click="addRestaurant">Add Restaurant</button>
     </form>
@@ -20,8 +20,8 @@ export default {
     data() {
         return {
             restaurant : {
-                restaurantName: '',
-                cuisineType: '',
+                name: '',
+                cuisine: '',
                 location: ''
             }
         };
@@ -30,8 +30,8 @@ export default {
         async addRestaurant() {
             console.log('Restaurant added:', this.restaurant);
             const result = await axios.post('http://localhost:3000/restaurants', {
-                name: this.restaurant.restaurantName,
-                cuisine: this.restaurant.cuisineType,
+                name: this.restaurant.name,
+                cuisine: this.restaurant.cuisine,
                 location: this.restaurant.location
             });
             console.warn('Result:', result);
@@ -41,8 +41,8 @@ export default {
                 console.error('Error adding restaurant:', result);
             }
             this.restaurant = {
-                restaurantName: '',
-                cuisineType: '',
+                name: '',
+                cuisine: '',
                 location: ''
             };
         }
