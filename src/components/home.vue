@@ -14,7 +14,7 @@
             <td>{{item.name}}</td>
             <td>{{item.cuisine}}</td>
             <td>{{item.location}}</td>
-            <td><router-link to="/update">Update</router-link></td>
+            <td><router-link :to="'/update/'+item.id">Update</router-link></td>
         </tr>
     </table>
 </template>
